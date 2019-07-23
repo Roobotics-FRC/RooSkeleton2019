@@ -1,8 +1,8 @@
 package frc.team4373.robot.input;
 
 import frc.team4373.robot.RobotMap;
-import frc.team4373.robot.input.filters.FineGrainedPiecewiseFilter;
-import frc.team4373.robot.input.filters.XboxAxisFilter;
+import frc.team4373.robot.input.filters.LogitechFilter;
+import frc.team4373.robot.input.filters.XboxFilter;
 
 /**
  * OI provides access to operator interface devices.
@@ -13,10 +13,17 @@ public final class OI {
     private RooJoystick operatorJoystick;
 
     private OI() {
+        //FIXME: These filters need to be tested.
+        /*
+        FineGrainedPiecewiseFilter: https://www.desmos.com/calculator/3rhniwotk2
+        XboxAxisFilter: https://www.desmos.com/calculator/r6t3rzmh2x
+
+        Template for new filters: https://www.desmos.com/calculator/jbb9fc5zwh
+         */
         this.driveJoystick = new RooJoystick(RobotMap.DRIVE_JOYSTICK_PORT,
-                new FineGrainedPiecewiseFilter(), RobotMap.JOYSTICK_DEFAULT_DEADZONE);
+                new LogitechFilter(), RobotMap.JOYSTICK_DEFAULT_DEADZONE);
         this.operatorJoystick = new RooJoystick(RobotMap.OPERATOR_JOYSTICK_PORT,
-                new XboxAxisFilter(), RobotMap.JOYSTICK_DEFAULT_DEADZONE);
+                new XboxFilter(), RobotMap.JOYSTICK_DEFAULT_DEADZONE);
     }
 
     /**
