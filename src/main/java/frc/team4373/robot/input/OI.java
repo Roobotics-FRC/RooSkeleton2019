@@ -7,16 +7,16 @@ import frc.team4373.robot.input.filters.XboxAxisFilter;
 /**
  * OI provides access to operator interface devices.
  */
-public class OI {
+public final class OI {
     private static volatile OI oi = null;
-    private RooJoystick<FineGrainedPiecewiseFilter> driveJoystick;
-    private RooJoystick<XboxAxisFilter> operatorJoystick;
+    private RooJoystick driveJoystick;
+    private RooJoystick operatorJoystick;
 
     private OI() {
-        this.driveJoystick =
-                new RooJoystick<>(RobotMap.DRIVE_JOYSTICK_PORT, new FineGrainedPiecewiseFilter());
-        this.operatorJoystick =
-                new RooJoystick<>(RobotMap.OPERATOR_JOYSTICK_PORT, new XboxAxisFilter());        
+        this.driveJoystick = new RooJoystick(RobotMap.DRIVE_JOYSTICK_PORT,
+                new FineGrainedPiecewiseFilter(), RobotMap.JOYSTICK_DEFAULT_DEADZONE);
+        this.operatorJoystick = new RooJoystick(RobotMap.OPERATOR_JOYSTICK_PORT,
+                new XboxAxisFilter(), RobotMap.JOYSTICK_DEFAULT_DEADZONE);
     }
 
     /**
